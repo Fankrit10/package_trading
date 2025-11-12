@@ -1,0 +1,81 @@
+{
+  "application": "Trading Application",
+  "scan_date": "2025-11-07",
+  "findings": [
+    {
+      "id": "VULN-001",
+      "tipo_vulnerabilidad": "Cloud Metadata Exposure",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Alta",
+      "endpoint": "http://192.168.5.107:3000/latest/meta-data/",
+      "descripcion": "La configuración incorrecta del servidor NGINX permite el acceso a la metadata de la instancia de la nube a través de la dirección IP interna '169.254.169.254'. Esto puede incluir información que permitiría a un atacante comprometer completamente el sistema.",
+      "recomendacion": "No confíe en los datos del usuario en las configuraciones de NGINX. Evite el uso de la variable $host que se establece desde el encabezado 'Host' y puede ser controlada por un atacante. Consulte la guía de NGINX para configuraciones seguras: https://www.nginx.com/blog/trust-no-one-perils-of-trusting-user-input/"
+    },
+    {
+      "id": "VULN-002",
+      "tipo_vulnerabilidad": "CORS Misconfiguration",
+      "categoria": "Control de Acceso",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La configuración incorrecta de CORS permite a un atacante realizar consultas AJAX autenticadas desde una página maliciosa cargada por el agente de usuario de la víctima.",
+      "recomendacion": "Especifique correctamente el origen en el encabezado Access-Control-Allow-Origin. Solo los sitios web de confianza que necesiten este recurso deben especificarse en este encabezado, utilizando el protocolo más seguro compatible. Consulte: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
+    },
+    {
+      "id": "VULN-003",
+      "tipo_vulnerabilidad": "Content Security Policy (CSP) Header Not Set",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La falta de un encabezado CSP permite ataques como Cross Site Scripting (XSS) y ataques de inyección de datos, que pueden ser utilizados para el robo de datos o la distribución de malware.",
+      "recomendacion": "Configure su servidor web para establecer el encabezado Content-Security-Policy. Consulte las guías de CSP para configuraciones seguras: https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy"
+    },
+    {
+      "id": "VULN-004",
+      "tipo_vulnerabilidad": "Cross-Domain Misconfiguration",
+      "categoria": "Control de Acceso",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La configuración incorrecta de CORS permite solicitudes de lectura de dominio cruzado desde dominios de terceros arbitrarios, utilizando APIs no autenticadas en este dominio.",
+      "recomendacion": "Asegúrese de que los datos sensibles no estén disponibles de manera no autenticada. Configure el encabezado HTTP Access-Control-Allow-Origin a un conjunto más restrictivo de dominios, o elimine todos los encabezados CORS para permitir que el navegador web aplique la Política de Origen Común de manera más restrictiva."
+    },
+    {
+      "id": "VULN-005",
+      "tipo_vulnerabilidad": "Hidden File Found",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "Se identificaron archivos sensibles accesibles que pueden filtrar información administrativa, de configuración o de credenciales.",
+      "recomendacion": "Determine si el componente es necesario en producción. Si no lo es, desactívelo. Si es necesario, asegúrese de que el acceso requiera autenticación y autorización adecuadas, o limite la exposición a sistemas internos o IPs específicas."
+    },
+    {
+      "id": "VULN-006",
+      "tipo_vulnerabilidad": "Cross-Domain JavaScript Source File Inclusion",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La página incluye archivos de script de dominios de terceros, lo que puede ser un vector para ataques si los scripts son comprometidos.",
+      "recomendacion": "Asegúrese de que los archivos de origen de JavaScript se carguen solo desde fuentes de confianza y que las fuentes no puedan ser controladas por los usuarios finales de la aplicación."
+    },
+    {
+      "id": "VULN-007",
+      "tipo_vulnerabilidad": "Deprecated Feature Policy Header Set",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "El encabezado Feature-Policy está obsoleto y ha sido renombrado a Permissions-Policy.",
+      "recomendacion": "Configure su servidor web para establecer el encabezado Permissions-Policy en lugar del encabezado Feature-Policy. Consulte: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy"
+    },
+    {
+      "id": "VULN-008",
+      "tipo_vulnerabilidad": "Timestamp Disclosure - Unix",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "Se divulgó un timestamp por el servidor, lo que podría ser utilizado para inferir información sobre el sistema.",
+      "recomendacion": "Confirme manualmente que los datos de timestamp no son sensibles y que los datos no pueden ser agregados para revelar patrones explotables."
+    }
+  ],
+  "modelo_usado": "GPT-4o",
+  "precision": "80%",
+  "latencia_promedio": "15.56s"
+}

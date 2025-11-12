@@ -1,0 +1,188 @@
+{
+	"info": {
+		"_postman_id": "268a662e-b8fb-4b42-b105-495be7c3f589",
+		"name": "New Collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32826166",
+		"_collection_link": "https://rolesandadministration.postman.co/workspace/Prueba-Valley~eec3b6eb-5dc7-4d1e-9246-9bb160fbb1fb/collection/32826166-268a662e-b8fb-4b42-b105-495be7c3f589?action=share&source=collection_link&creator=32826166"
+	},
+	"item": [
+		{
+			"name": "/signal - create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has correct message\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"message\", \"Signal processed successfully\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"datetime\": \"2025-02-24T00:00:00\",\n  \"close\": 2195439.81388,\n  \"signal\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_TRADING}}/signal",
+					"host": [
+						"{{HOST_TRADING}}"
+					],
+					"path": [
+						"signal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/performance - create",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has correct cumulative_return\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"cumulative_return\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST_TRADING}}/performance",
+					"host": [
+						"{{HOST_TRADING}}"
+					],
+					"path": [
+						"performance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/history - get",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has correct history array\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"history\").that.is.an(\"array\").with.length.above(0);\r",
+							"\r",
+							"    jsonData.history.forEach(function(item) {\r",
+							"        pm.expect(item).to.have.property(\"_id\").that.is.a(\"string\");\r",
+							"        pm.expect(item).to.have.property(\"datetime\").that.is.a(\"string\");\r",
+							"        pm.expect(item).to.have.property(\"close\").that.is.a(\"number\");\r",
+							"        pm.expect(item).to.have.property(\"signal\").that.is.a(\"number\");\r",
+							"        pm.expect(item).to.have.property(\"position\").that.is.a(\"number\");\r",
+							"        pm.expect(item).to.have.property(\"cumulative_return\").that.is.a(\"number\");\r",
+							"        pm.expect(item).to.have.property(\"timestamp\").that.is.a(\"string\");\r",
+							"    });\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST_TRADING}}/history",
+					"host": [
+						"{{HOST_TRADING}}"
+					],
+					"path": [
+						"history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/enhance_performance LLM",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response has 'enhancement_suggestions' property\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData).to.have.property(\"enhancement_suggestions\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_TRADING}}/enhance_performance",
+					"host": [
+						"{{HOST_TRADING}}"
+					],
+					"path": [
+						"enhance_performance"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

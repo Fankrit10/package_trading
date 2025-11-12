@@ -1,0 +1,5 @@
+services:
+  pnqa_trading:
+    build: .
+    ports:
+      - "8001:8001"

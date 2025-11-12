@@ -1,0 +1,99 @@
+{
+  "application": "Trading Application",
+  "scan_date": "2025-11-07",
+  "findings": [
+    {
+      "id": "VULN-001",
+      "tipo_vulnerabilidad": "Content Security Policy (CSP) Header Not Set",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La política de seguridad de contenido (CSP) no está configurada, lo que puede permitir ataques como XSS y inyecciones de datos.",
+      "recomendacion": "Configurar el servidor web para establecer el encabezado Content-Security-Policy. Referencias: https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy"
+    },
+    {
+      "id": "VULN-002",
+      "tipo_vulnerabilidad": "Cross-Domain Misconfiguration",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La configuración de CORS permite solicitudes de lectura de dominios arbitrarios, lo que podría exponer datos no autenticados.",
+      "recomendacion": "Restringir el encabezado Access-Control-Allow-Origin a dominios específicos o eliminar los encabezados CORS. Referencias: https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy"
+    },
+    {
+      "id": "VULN-003",
+      "tipo_vulnerabilidad": "ZAP is Out of Date",
+      "categoria": "Componentes Vulnerables",
+      "severidad": "Media",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La versión de ZAP utilizada para probar la aplicación está desactualizada.",
+      "recomendacion": "Descargar e instalar la última versión de ZAP desde https://www.zaproxy.org/download/"
+    },
+    {
+      "id": "VULN-004",
+      "tipo_vulnerabilidad": "Cross-Domain JavaScript Source File Inclusion",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "La página incluye archivos de script de dominios de terceros, lo que podría ser un riesgo si las fuentes no son confiables.",
+      "recomendacion": "Asegurarse de que los archivos de JavaScript se carguen solo desde fuentes confiables."
+    },
+    {
+      "id": "VULN-005",
+      "tipo_vulnerabilidad": "Dangerous JS Functions",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "Se utilizan funciones de JavaScript peligrosas que podrían dejar el sitio vulnerable.",
+      "recomendacion": "Consultar las referencias de seguridad sobre el uso de estas funciones: https://angular.io/guide/security"
+    },
+    {
+      "id": "VULN-006",
+      "tipo_vulnerabilidad": "Deprecated Feature Policy Header Set",
+      "categoria": "Configuración de Seguridad",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "El encabezado Feature-Policy está obsoleto y ha sido renombrado a Permissions-Policy.",
+      "recomendacion": "Configurar el servidor para establecer el encabezado Permissions-Policy. Referencias: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy"
+    },
+    {
+      "id": "VULN-007",
+      "tipo_vulnerabilidad": "Full Path Disclosure",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000/ftp/coupons_2013.md.bak",
+      "descripcion": "Se ha expuesto la ruta completa de archivos, lo que podría ser sensible.",
+      "recomendacion": "Deshabilitar la navegación de directorios en el servidor web. Referencias: https://owasp.org/www-community/attacks/Full_Path_Disclosure"
+    },
+    {
+      "id": "VULN-008",
+      "tipo_vulnerabilidad": "Timestamp Disclosure - Unix",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Baja",
+      "endpoint": "http://192.168.5.107:3000",
+      "descripcion": "Se ha revelado un timestamp por la aplicación/servidor web.",
+      "recomendacion": "Confirmar manualmente que los datos de timestamp no son sensibles y que no pueden ser utilizados para explotar otras vulnerabilidades. Referencias: https://cwe.mitre.org/data/definitions/200.html"
+    },
+    {
+      "id": "VULN-009",
+      "tipo_vulnerabilidad": "Base64 Disclosure",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Informativa",
+      "endpoint": "http://192.168.5.107:3000/ftp",
+      "descripcion": "Se ha revelado información codificada en Base64 por la aplicación/servidor web.",
+      "recomendacion": "Confirmar manualmente que los datos Base64 no filtran información sensible. Referencias: https://projects.webappsec.org/w/page/13246936/Information%20Leakage"
+    },
+    {
+      "id": "VULN-010",
+      "tipo_vulnerabilidad": "Information Disclosure - Suspicious Comments",
+      "categoria": "Exposición de Datos Sensibles",
+      "severidad": "Informativa",
+      "endpoint": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/main.js",
+      "descripcion": "La respuesta contiene comentarios sospechosos que pueden ayudar a un atacante.",
+      "recomendacion": "Eliminar todos los comentarios que devuelvan información que pueda ayudar a un atacante y corregir cualquier problema subyacente al que se refieran."
+    }
+  ],
+  "modelo_usado": "GPT-4o",
+  "precision": "80%",
+  "latencia_promedio": "25.11s"
+}

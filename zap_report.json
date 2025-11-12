@@ -1,0 +1,1298 @@
+{
+	"@programName": "ZAP",
+	"@version": "2.14.0",
+	"@generated": "Fri, 7 Nov 2025 15:00:04",
+	"site":[ 
+		{
+			"@name": "http://192.168.5.107:3000",
+			"@host": "192.168.5.107",
+			"@port": "3000",
+			"@ssl": "false",
+			"alerts": [ 
+				{
+					"pluginid": "10038",
+					"alertRef": "10038-1",
+					"alert": "Content Security Policy (CSP) Header Not Set",
+					"name": "Content Security Policy (CSP) Header Not Set",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks, including Cross Site Scripting (XSS) and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/coupons_2013.md.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/eastere.gg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/encrypt.pyc",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/package-lock.json.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/package.json.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/suspicious_errors.yml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:43:13",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/Security/CSP/Introducing_Content_Security_Policy</p><p>https://cheatsheetseries.owasp.org/cheatsheets/Content_Security_Policy_Cheat_Sheet.html</p><p>https://www.w3.org/TR/CSP/</p><p>https://w3c.github.io/webappsec-csp/</p><p>https://web.dev/articles/csp</p><p>https://caniuse.com/#feat=contentsecuritypolicy</p><p>https://content-security-policy.com/</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10098",
+					"alertRef": "10098",
+					"alert": "Cross-Domain Misconfiguration",
+					"name": "Cross-Domain Misconfiguration",
+					"riskcode": "2",
+					"confidence": "2",
+					"riskdesc": "Medium (Medium)",
+					"desc": "<p>Web browser data loading may be possible, due to a Cross Origin Resource Sharing (CORS) misconfiguration on the web server</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/acquisitions.md",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/eastere.gg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/legal.md",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Access-Control-Allow-Origin: *",
+							"otherinfo": "The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing."
+						}
+					],
+					"count": "12",
+					"solution": "<p>Ensure that sensitive data is not available in an unauthenticated manner (using IP address white-listing, for instance).</p><p>Configure the \"Access-Control-Allow-Origin\" HTTP header to a more restrictive set of domains, or remove all CORS headers entirely, to allow the web browser to enforce the Same Origin Policy (SOP) in a more restrictive manner.</p>",
+					"otherinfo": "<p>The CORS misconfiguration on the web server permits cross-domain read requests from arbitrary third party domains, using unauthenticated APIs on this domain. Web browser implementations do not permit arbitrary third parties to read the response from authenticated APIs, however. This reduces the risk somewhat. This misconfiguration could be used by an attacker to access data that is available in an unauthenticated manner, but which uses some other form of security, such as IP address white-listing.</p>",
+					"reference": "<p>https://vulncat.fortify.com/en/detail?id=desc.config.dotnet.html5_overly_permissive_cors_policy</p>",
+					"cweid": "264",
+					"wascid": "14",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10116",
+					"alertRef": "10116",
+					"alert": "ZAP is Out of Date",
+					"name": "ZAP is Out of Date",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>The version of ZAP you are using to test your app is out of date and is no longer being updated.</p><p>The risk level is set based on how out of date your ZAP version is.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "The latest version of ZAP is 2.16.1"
+						}
+					],
+					"count": "1",
+					"solution": "<p>Download the latest version of ZAP from https://www.zaproxy.org/download/ and install it.</p>",
+					"otherinfo": "<p>The latest version of ZAP is 2.16.1</p>",
+					"reference": "<p>https://www.zaproxy.org/download/</p>",
+					"cweid": "1104",
+					"wascid": "45",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10017",
+					"alertRef": "10017",
+					"alert": "Cross-Domain JavaScript Source File Inclusion",
+					"name": "Cross-Domain JavaScript Source File Inclusion",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The page includes one or more script files from a third-party domain.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:43:13",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:43:13",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:59:18",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:59:18",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js\"></script>",
+							"otherinfo": ""
+						}
+					],
+					"count": "10",
+					"solution": "<p>Ensure JavaScript source files are loaded from only trusted sources, and the sources can't be controlled by end users of the application.</p>",
+					"otherinfo": "",
+					"reference": "",
+					"cweid": "829",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10110",
+					"alertRef": "10110",
+					"alert": "Dangerous JS Functions",
+					"name": "Dangerous JS Functions",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A dangerous JS function seems to be in use that would leave the site vulnerable.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "bypassSecurityTrustHtml",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "bypassSecurityTrustHtml",
+							"otherinfo": ""
+						}
+					],
+					"count": "2",
+					"solution": "<p>See the references for security advice on the use of these functions.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://angular.io/guide/security</p>",
+					"cweid": "749",
+					"wascid": "-1",
+					"sourceid": "22"
+				},
+				{
+					"pluginid": "10063",
+					"alertRef": "10063-2",
+					"alert": "Deprecated Feature Policy Header Set",
+					"name": "Deprecated Feature Policy Header Set",
+					"riskcode": "1",
+					"confidence": "2",
+					"riskdesc": "Low (Medium)",
+					"desc": "<p>The header has now been renamed to Permissions-Policy. </p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/coupons_2013.md.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/eastere.gg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/encrypt.pyc",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Feature-Policy",
+							"otherinfo": ""
+						}
+					],
+					"count": "11",
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is configured to set the Permissions-Policy header instead of the Feature-Policy header.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Permissions-Policy</p><p>https://scotthelme.co.uk/goodbye-feature-policy-and-hello-permissions-policy/</p>",
+					"cweid": "16",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "110009",
+					"alertRef": "110009",
+					"alert": "Full Path Disclosure",
+					"name": "Full Path Disclosure",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>The full path of files which might be sensitive has been exposed to the client.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000/ftp/coupons_2013.md.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/eastere.gg",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/encrypt.pyc",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/package-lock.json.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/package.json.bak",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/suspicious_errors.yml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "/lib/",
+							"otherinfo": ""
+						}
+					],
+					"count": "6",
+					"solution": "<p>Disable directory browsing in your web server. Refer to the web server documentation.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://owasp.org/www-community/attacks/Full_Path_Disclosure</p>",
+					"cweid": "209",
+					"wascid": "13",
+					"sourceid": "35"
+				},
+				{
+					"pluginid": "10096",
+					"alertRef": "10096",
+					"alert": "Timestamp Disclosure - Unix",
+					"name": "Timestamp Disclosure - Unix",
+					"riskcode": "1",
+					"confidence": "1",
+					"riskdesc": "Low (Low)",
+					"desc": "<p>A timestamp was disclosed by the application/web server - Unix</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1650485437",
+							"otherinfo": "1650485437, which evaluates to: 2022-04-20 20:10:37"
+						},
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1981395349",
+							"otherinfo": "1981395349, which evaluates to: 2032-10-14 19:35:49"
+						},
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2038834951",
+							"otherinfo": "2038834951, which evaluates to: 2034-08-10 15:02:31"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1650485437",
+							"otherinfo": "1650485437, which evaluates to: 2022-04-20 20:10:37"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1981395349",
+							"otherinfo": "1981395349, which evaluates to: 2032-10-14 19:35:49"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2038834951",
+							"otherinfo": "2038834951, which evaluates to: 2034-08-10 15:02:31"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1650485437",
+							"otherinfo": "1650485437, which evaluates to: 2022-04-20 20:10:37"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1680327869",
+							"otherinfo": "1680327869, which evaluates to: 2023-04-01 05:44:29"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1701244813",
+							"otherinfo": "1701244813, which evaluates to: 2023-11-29 08:00:13"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1818181818",
+							"otherinfo": "1818181818, which evaluates to: 2027-08-13 18:30:18"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1839622642",
+							"otherinfo": "1839622642, which evaluates to: 2028-04-17 22:17:22"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1863874346",
+							"otherinfo": "1863874346, which evaluates to: 2029-01-23 14:52:26"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1917098446",
+							"otherinfo": "1917098446, which evaluates to: 2030-10-01 15:20:46"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1981395349",
+							"otherinfo": "1981395349, which evaluates to: 2032-10-14 19:35:49"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2033195021",
+							"otherinfo": "2033195021, which evaluates to: 2034-06-06 08:23:41"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "2038834951",
+							"otherinfo": "2038834951, which evaluates to: 2034-08-10 15:02:31"
+						}
+					],
+					"count": "16",
+					"solution": "<p>Manually confirm that the timestamp data is not sensitive, and that the data cannot be aggregated to disclose exploitable patterns.</p>",
+					"otherinfo": "<p>1650485437, which evaluates to: 2022-04-20 20:10:37</p>",
+					"reference": "<p>https://cwe.mitre.org/data/definitions/200.html</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10094",
+					"alertRef": "10094-3",
+					"alert": "Base64 Disclosure",
+					"name": "Base64 Disclosure",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>Base64 encoded data was disclosed by the application/web server. Note: in the interests of performance not all base64 strings in the response were analyzed individually, the entire response should be looked at by the analyst/security team/developer(s).</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000/ftp",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==",
+							"otherinfo": "\uFFFDPNG\r\n\\x001a\n\\x0000\\x0000\\x0000\rIHDR\\x0000\\x0000\\x0000\\x0010\\x0000\\x0000\\x0000\\x0010\\x0008\\x0003\\x0000\\x0000\\x0000(-\\x000fS\\x0000\\x0000\\x0000\\x0004gAMA\\x0000\\x0000\uFFFD\uFFFD\\x000b\uFFFDa\\x0005\\x0000\\x0000\\x0001kPLTE\\x0000\\x0000\\x0000\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\\u06AE4\u06A45\u06AB6\uFFFD\uFFFD\uFFFD\u06985\u069F5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDD\uFFFD\uFFFDh\u06AF6\uFFFD\uFFFD\uFFFD\u06B36\u06A67\uFFFD\u0794\uFFFD\uFFFD\uFFFD\u06AA6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06AF5\u06AB5\u06A16\uFFFD\u0514\uFFFD\uFFFD0\uFFFD\uFFFDO\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDv\uFFFD\uFFFDt\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\u069A6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFDz\uFFFD\uFFFD\u06744\uFFFD\uFFFD\uFFFD\uFFFD\u0713\uFFFD\uFFFD;\uFFFD\uFFFD]\uFFFD\uFFFD&\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0480\u0606,\uFFFD\u0388\uFFFD\u0791\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04C5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0541\uFFFD\uFFFDI\uFFFD\uFFFDi\uFFFD\uFFFD.\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDl\uFFFD\uFFFDl\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDs\uFFFD\uFFFDl\uFFFD\uFFFD9\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\uFFFD\u06F6<\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDW\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD|\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDG\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0767\uFFFD\uFFFDe\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06DE\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\u0696\uFFFD\uFFFDc\uFFFD\u060E\uFFFD\u05C6\uFFFD\uFFFD\uFFFD\u06945\u064E3\uFFFD\uFFFD\uFFFD\u0607-\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD`\uFFFD\uFFFD\uFFFD\u0608-\uFFFDs\uFFFD\uFFFD\\x0000\\x0000\\x0000\\x0001tRNS\\x0000@\uFFFD\uFFFDf\\x0000\\x0000\\x0000\uFFFDIDAT\\x0018\uFFFDc` \\x0003h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!\\x0004\uFFFD4\uFFFD\\x001d\uFFFD\uFFFD\u075DKJJT\uFFFDA\\x0002\uFFFD\"\uFFFD\uFFFD\uFFFD\uFFFD\u0156\uFFFD\uFFFD\uFFFDy2<@\\x0001!a\\x0001-ko'\\x000b\\x000359Y^f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDGpai\uFFFDBq^9+P\uFFFD\uFFFD\\\uFFFD*\uFFFD4\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFD\\x0005( \uFFFDb\uFFFD\\x0012\\x0019\\x001b\\x0015\uFFFD#\uFFFD\uFFFD\uFFFD\\x0001\\x0014P6w\r\uFFFDOIN\n\uFFFD\u0456\uFFFDd\\x0007\n\u4EC5%\uFFFDff\uFFFD\uFFFDx\uFFFD\uFFFDJ\uFFFD\\x0003\\x0005\n\"\\x0012\u04F2rr3\uFFFD=m\uFFFD\n@\\x000e\uFFFD(\uFFFD\uFFFD\uFFFD\uFFFD\nC\"\uFFFD\\x0006\\x0000\\x0019\uFFFD'\uFFFD\\x000ei\u01ED\\x0000\\x0000\\x0000\\x0000IEND\uFFFDB`\uFFFD"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==",
+							"otherinfo": "\uFFFDPNG\r\n\\x001a\n\\x0000\\x0000\\x0000\rIHDR\\x0000\\x0000\\x0000\\x0010\\x0000\\x0000\\x0000\\x0010\\x0008\\x0003\\x0000\\x0000\\x0000(-\\x000fS\\x0000\\x0000\\x0000\\x0004gAMA\\x0000\\x0000\uFFFD\uFFFD\\x000b\uFFFDa\\x0005\\x0000\\x0000\\x0001kPLTE\\x0000\\x0000\\x0000\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\\u06AE4\u06A45\u06AB6\uFFFD\uFFFD\uFFFD\u06985\u069F5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDD\uFFFD\uFFFDh\u06AF6\uFFFD\uFFFD\uFFFD\u06B36\u06A67\uFFFD\u0794\uFFFD\uFFFD\uFFFD\u06AA6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06AF5\u06AB5\u06A16\uFFFD\u0514\uFFFD\uFFFD0\uFFFD\uFFFDO\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDv\uFFFD\uFFFDt\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\u069A6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFDz\uFFFD\uFFFD\u06744\uFFFD\uFFFD\uFFFD\uFFFD\u0713\uFFFD\uFFFD;\uFFFD\uFFFD]\uFFFD\uFFFD&\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0480\u0606,\uFFFD\u0388\uFFFD\u0791\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04C5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0541\uFFFD\uFFFDI\uFFFD\uFFFDi\uFFFD\uFFFD.\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDl\uFFFD\uFFFDl\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDs\uFFFD\uFFFDl\uFFFD\uFFFD9\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\uFFFD\u06F6<\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDW\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD|\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDG\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0767\uFFFD\uFFFDe\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06DE\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\u0696\uFFFD\uFFFDc\uFFFD\u060E\uFFFD\u05C6\uFFFD\uFFFD\uFFFD\u06945\u064E3\uFFFD\uFFFD\uFFFD\u0607-\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD`\uFFFD\uFFFD\uFFFD\u0608-\uFFFDs\uFFFD\uFFFD\\x0000\\x0000\\x0000\\x0001tRNS\\x0000@\uFFFD\uFFFDf\\x0000\\x0000\\x0000\uFFFDIDAT\\x0018\uFFFDc` \\x0003h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!\\x0004\uFFFD4\uFFFD\\x001d\uFFFD\uFFFD\u075DKJJT\uFFFDA\\x0002\uFFFD\"\uFFFD\uFFFD\uFFFD\uFFFD\u0156\uFFFD\uFFFD\uFFFDy2<@\\x0001!a\\x0001-ko'\\x000b\\x000359Y^f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDGpai\uFFFDBq^9+P\uFFFD\uFFFD\\\uFFFD*\uFFFD4\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFD\\x0005( \uFFFDb\uFFFD\\x0012\\x0019\\x001b\\x0015\uFFFD#\uFFFD\uFFFD\uFFFD\\x0001\\x0014P6w\r\uFFFDOIN\n\uFFFD\u0456\uFFFDd\\x0007\n\u4EC5%\uFFFDff\uFFFD\uFFFDx\uFFFD\uFFFDJ\uFFFD\\x0003\\x0005\n\"\\x0012\u04F2rr3\uFFFD=m\uFFFD\n@\\x000e\uFFFD(\uFFFD\uFFFD\uFFFD\uFFFD\nC\"\uFFFD\\x0006\\x0000\\x0019\uFFFD'\uFFFD\\x000ei\u01ED\\x0000\\x0000\\x0000\\x0000IEND\uFFFDB`\uFFFD"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/quarantine",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAABGdBTUEAALGPC/xhBQAAAWtQTFRFAAAA/PPQ9Nhc2q402qQ12qs2/PTX2pg12p81+/LM89NE9dto2q82+/fp2rM22qY39d6U+/bo2qo2/frx/vz32q812qs12qE279SU8c4w9NZP+/LK//367s9y7s925cp0/vzw9t92//342po2/vz25s1579B6+OSO2bQ0/v799NyT8tE79dld8Msm+OrC/vzx79KA2IYs7s6I9d6R4cJe9+OF/PLI/fry79OF/v30//328tWB89RJ8c9p8c0u9eCf//7+9txs6sts5Mdr+++5+u2z/vrv+/fq6cFz8dBs8tA57cpq+OaU9uGs27Y8//799NdX/PbY9uB89unJ//z14sNf+emh+emk+vDc+uys9+OL8dJy89NH+eic8tN5+OaV+OWR9N2n9dtl9t529+KF9+GB9Nue9NdU8tR/9t5y89qW9dpj89iO89eG/vvu2pQ12Y4z/vzy2Ict/vvv48dr/vzz4sNg///+2Igty3PqwQAAAAF0Uk5TAEDm2GYAAACtSURBVBjTY2AgA2iYlJWVhfohBPg0yx38y92dS0pKVOVBAqIi6sb2vsWWpfrFeTI8QAEhYQEta28nCwM1OVleZqCAmKCEkUdwYWmhQnFeOStQgL9cySqkNNDHVJGbiY0FKCCuYuYSGRsV5KgjxcXIARRQNncNj09JTgqw0ZbkZAcK5LuFJaRmZqfHeNnpSucDBQoiEtOycnIz4qI9bfUKQA6pKKqAgqIKQyK8BgAZ5yfODmnHrQAAAABJRU5ErkJggg==",
+							"otherinfo": "\uFFFDPNG\r\n\\x001a\n\\x0000\\x0000\\x0000\rIHDR\\x0000\\x0000\\x0000\\x0010\\x0000\\x0000\\x0000\\x0010\\x0008\\x0003\\x0000\\x0000\\x0000(-\\x000fS\\x0000\\x0000\\x0000\\x0004gAMA\\x0000\\x0000\uFFFD\uFFFD\\x000b\uFFFDa\\x0005\\x0000\\x0000\\x0001kPLTE\\x0000\\x0000\\x0000\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\\u06AE4\u06A45\u06AB6\uFFFD\uFFFD\uFFFD\u06985\u069F5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDD\uFFFD\uFFFDh\u06AF6\uFFFD\uFFFD\uFFFD\u06B36\u06A67\uFFFD\u0794\uFFFD\uFFFD\uFFFD\u06AA6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06AF5\u06AB5\u06A16\uFFFD\u0514\uFFFD\uFFFD0\uFFFD\uFFFDO\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDv\uFFFD\uFFFDt\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\u069A6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFDz\uFFFD\uFFFD\u06744\uFFFD\uFFFD\uFFFD\uFFFD\u0713\uFFFD\uFFFD;\uFFFD\uFFFD]\uFFFD\uFFFD&\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0480\u0606,\uFFFD\u0388\uFFFD\u0791\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04C5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0541\uFFFD\uFFFDI\uFFFD\uFFFDi\uFFFD\uFFFD.\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDl\uFFFD\uFFFDl\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDs\uFFFD\uFFFDl\uFFFD\uFFFD9\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\uFFFD\u06F6<\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDW\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD|\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDG\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0767\uFFFD\uFFFDe\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06DE\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\u0696\uFFFD\uFFFDc\uFFFD\u060E\uFFFD\u05C6\uFFFD\uFFFD\uFFFD\u06945\u064E3\uFFFD\uFFFD\uFFFD\u0607-\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD`\uFFFD\uFFFD\uFFFD\u0608-\uFFFDs\uFFFD\uFFFD\\x0000\\x0000\\x0000\\x0001tRNS\\x0000@\uFFFD\uFFFDf\\x0000\\x0000\\x0000\uFFFDIDAT\\x0018\uFFFDc` \\x0003h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!\\x0004\uFFFD4\uFFFD\\x001d\uFFFD\uFFFD\u075DKJJT\uFFFDA\\x0002\uFFFD\"\uFFFD\uFFFD\uFFFD\uFFFD\u0156\uFFFD\uFFFD\uFFFDy2<@\\x0001!a\\x0001-ko'\\x000b\\x000359Y^f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDGpai\uFFFDBq^9+P\uFFFD\uFFFD\\\uFFFD*\uFFFD4\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFD\\x0005( \uFFFDb\uFFFD\\x0012\\x0019\\x001b\\x0015\uFFFD#\uFFFD\uFFFD\uFFFD\\x0001\\x0014P6w\r\uFFFDOIN\n\uFFFD\u0456\uFFFDd\\x0007\n\u4EC5%\uFFFDff\uFFFD\uFFFDx\uFFFD\uFFFDJ\uFFFD\\x0003\\x0005\n\"\\x0012\u04F2rr3\uFFFD=m\uFFFD\n@\\x000e\uFFFD(\uFFFD\uFFFD\uFFFD\uFFFD\nC\"\uFFFD\\x0006\\x0000\\x0019\uFFFD'\uFFFD\\x000ei\u01ED\\x0000\\x0000\\x0000\\x0000IEND\uFFFDB`\uFFFD"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "1AbKfgvw9psQ41NbLi8kufDQTezwG8DRZm",
+							"otherinfo": "\uFFFD\\x0006\uFFFD~\\x000b\uFFFD\uFFFD\uFFFD\\x0010\uFFFDS[./$\uFFFD\uFFFD\uFFFDM\uFFFD\uFFFD\\x001b\uFFFD\uFFFDf"
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "u2010u2015u2018u2019u2025u2026u201Cu201Du2225u2260",
+							"otherinfo": "\uFFFDm5\uFFFD\uFFFD\u05DB\uFFFD\uFFFD_.\uFFFDM}\uFFFDm6\uFFFD\uFFFD\u06EB\uFFFD\uFFFDP\uFFFD\uFFFDMC\uFFFDm\uFFFD\uFFFD\uFFFD\uFFFD"
+						}
+					],
+					"count": "5",
+					"solution": "<p>Manually confirm that the Base64 data does not leak sensitive information, and that the data cannot be aggregated/used to exploit other vulnerabilities.</p>",
+					"otherinfo": "<p>\uFFFDPNG</p><p>\\x001a</p><p>\\x0000\\x0000\\x0000\rIHDR\\x0000\\x0000\\x0000\\x0010\\x0000\\x0000\\x0000\\x0010\\x0008\\x0003\\x0000\\x0000\\x0000(-\\x000fS\\x0000\\x0000\\x0000\\x0004gAMA\\x0000\\x0000\uFFFD\uFFFD\\x000b\uFFFDa\\x0005\\x0000\\x0000\\x0001kPLTE\\x0000\\x0000\\x0000\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\\\u06AE4\u06A45\u06AB6\uFFFD\uFFFD\uFFFD\u06985\u069F5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDD\uFFFD\uFFFDh\u06AF6\uFFFD\uFFFD\uFFFD\u06B36\u06A67\uFFFD\u0794\uFFFD\uFFFD\uFFFD\u06AA6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06AF5\u06AB5\u06A16\uFFFD\u0514\uFFFD\uFFFD0\uFFFD\uFFFDO\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDv\uFFFD\uFFFDt\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\u069A6\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFDz\uFFFD\uFFFD\u06744\uFFFD\uFFFD\uFFFD\uFFFD\u0713\uFFFD\uFFFD;\uFFFD\uFFFD]\uFFFD\uFFFD&\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0480\u0606,\uFFFD\u0388\uFFFD\u0791\uFFFD\uFFFD^\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u04C5\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0541\uFFFD\uFFFDI\uFFFD\uFFFDi\uFFFD\uFFFD.\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDl\uFFFD\uFFFDl\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDs\uFFFD\uFFFDl\uFFFD\uFFFD9\uFFFD\uFFFDj\uFFFD\uFFFD\uFFFD\uFFFD\u06F6<\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDW\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD|\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD_\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\uFFFDG\uFFFD\uFFFD\uFFFD\uFFFDy\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u0767\uFFFD\uFFFDe\uFFFD\uFFFDv\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\u06DE\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFDr\uFFFD\u0696\uFFFD\uFFFDc\uFFFD\u060E\uFFFD\u05C6\uFFFD\uFFFD\uFFFD\u06945\u064E3\uFFFD\uFFFD\uFFFD\u0607-\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDk\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD`\uFFFD\uFFFD\uFFFD\u0608-\uFFFDs\uFFFD\uFFFD\\x0000\\x0000\\x0000\\x0001tRNS\\x0000@\uFFFD\uFFFDf\\x0000\\x0000\\x0000\uFFFDIDAT\\x0018\uFFFDc` \\x0003h\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD!\\x0004\uFFFD4\uFFFD\\x001d\uFFFD\uFFFD\u075DKJJT\uFFFDA\\x0002\uFFFD\"\uFFFD\uFFFD\uFFFD\uFFFD\u0156\uFFFD\uFFFD\uFFFDy2<@\\x0001!a\\x0001-ko'\\x000b\\x000359Y^f\uFFFD\uFFFD\uFFFD\uFFFD\uFFFD\uFFFDGpai\uFFFDBq^9+P\uFFFD\uFFFD\\\uFFFD*\uFFFD4\uFFFD\uFFFDT\uFFFD\uFFFD\uFFFD\uFFFD\\x0005( \uFFFDb\uFFFD\\x0012\\x0019\\x001b\\x0015\uFFFD#\uFFFD\uFFFD\uFFFD\\x0001\\x0014P6w\r\uFFFDOIN</p><p>\uFFFD\u0456\uFFFDd\\x0007</p><p>\u4EC5%\uFFFDff\uFFFD\uFFFDx\uFFFD\uFFFDJ\uFFFD\\x0003\\x0005</p><p>\"\\x0012\u04F2rr3\uFFFD=m\uFFFD</p><p>@\\x000e\uFFFD(\uFFFD\uFFFD\uFFFD\uFFFD</p><p>C\"\uFFFD\\x0006\\x0000\\x0019\uFFFD'\uFFFD\\x000ei\u01ED\\x0000\\x0000\\x0000\\x0000IEND\uFFFDB`\uFFFD</p>",
+					"reference": "<p>https://projects.webappsec.org/w/page/13246936/Information%20Leakage</p>",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "24"
+				},
+				{
+					"pluginid": "10027",
+					"alertRef": "10027",
+					"alert": "Information Disclosure - Suspicious Comments",
+					"name": "Information Disclosure - Suspicious Comments",
+					"riskcode": "0",
+					"confidence": "1",
+					"riskdesc": "Informational (Low)",
+					"desc": "<p>The response appears to contain suspicious comments which may help an attacker. Note: Matches made within script blocks or files are against the entire content not only comments.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "select",
+							"otherinfo": "The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"\"use strict\";(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[792],{1676:(z,W,m)=>{var F=m(467),D=m(7705),s=m(26\", see evidence field for the suspicious comment/snippet."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "Query",
+							"otherinfo": "The following pattern was used: \\bQUERY\\b and was detected in the element starting with: \"(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[502],{3:(ct,S,c)=>{\"use strict\";c.d(S,{WX:()=>M});var r=c(2615)\", see evidence field for the suspicious comment/snippet."
+						}
+					],
+					"count": "12",
+					"solution": "<p>Remove all comments that return information that may help an attacker and fix any underlying problems they refer to.</p>",
+					"otherinfo": "<p>The following pattern was used: \\bSELECT\\b and was detected in the element starting with: \"<style>html{--mat-sys-on-surface:initial}.mat-app-background{background-color:var(--mat-app-background-color, var(--mat-sys-back\", see evidence field for the suspicious comment/snippet.</p>",
+					"reference": "",
+					"cweid": "200",
+					"wascid": "13",
+					"sourceid": "130"
+				},
+				{
+					"pluginid": "10109",
+					"alertRef": "10109",
+					"alert": "Modern Web Application",
+					"name": "Modern Web Application",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The application appears to be a modern web application. If you need to explore it automatically then the Ajax Spider may well be more effective than the standard one.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:43:13",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/build/routes/fileServer.js:59:18",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/index.js:286:9",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/index.js:328:13",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/index.js:365:14",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/index.js:376:14",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/juice-shop/node_modules/express/lib/router/layer.js:95:5",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "<script src=\"//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js\"></script>",
+							"otherinfo": "No links have been found while there are scripts, which is an indication that this is a modern web application."
+						}
+					],
+					"count": "11",
+					"solution": "<p>This is an informational alert and so no changes are required.</p>",
+					"otherinfo": "<p>No links have been found while there are scripts, which is an indication that this is a modern web application.</p>",
+					"reference": "",
+					"cweid": "-1",
+					"wascid": "-1",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90005",
+					"alertRef": "90005-3",
+					"alert": "Sec-Fetch-Dest Header is Missing",
+					"name": "Sec-Fetch-Dest Header is Missing",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Specifies how and where the data would be used. For instance, if the value is audio, then the requested resource must be audio data and not any other type of resource.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "Sec-Fetch-Dest",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that Sec-Fetch-Dest header is included in request headers.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Dest</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90005",
+					"alertRef": "90005-2",
+					"alert": "Sec-Fetch-Mode Header is Missing",
+					"name": "Sec-Fetch-Mode Header is Missing",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Allows to differentiate between requests for navigating between HTML pages and requests for loading resources like images, audio etc.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "Sec-Fetch-Mode",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that Sec-Fetch-Mode header is included in request headers.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Mode</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90005",
+					"alertRef": "90005-1",
+					"alert": "Sec-Fetch-Site Header is Missing",
+					"name": "Sec-Fetch-Site Header is Missing",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Specifies the relationship between request initiator's origin and target's origin.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "Sec-Fetch-Site",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that Sec-Fetch-Site header is included in request headers.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-Site</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "90005",
+					"alertRef": "90005-4",
+					"alert": "Sec-Fetch-User Header is Missing",
+					"name": "Sec-Fetch-User Header is Missing",
+					"riskcode": "0",
+					"confidence": "3",
+					"riskdesc": "Informational (High)",
+					"desc": "<p>Specifies if a navigation request was initiated by a user.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "Sec-Fetch-User",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": ""
+						}
+					],
+					"count": "3",
+					"solution": "<p>Ensure that Sec-Fetch-User header is included in user initiated requests.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Sec-Fetch-User</p>",
+					"cweid": "352",
+					"wascid": "9",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049",
+					"alert": "Storable and Cacheable Content",
+					"name": "Storable and Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users.  If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000/ftp",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						},
+						{
+							"uri": "http://192.168.5.107:3000/robots.txt",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "",
+							"otherinfo": "In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234."
+						}
+					],
+					"count": "2",
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information.  If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request. </p>",
+					"otherinfo": "<p>In the absence of an explicitly specified caching lifetime directive in the response, a liberal lifetime heuristic of 1 year was assumed. This is permitted by rfc7234.</p>",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "24"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049",
+					"alert": "Storable but Non-Cacheable Content",
+					"name": "Storable but Non-Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, but will not be retrieved directly from the cache, without validating the request upstream, in response to similar requests from other users. </p>",
+					"instances":[ 
+						{
+							"uri": "http://192.168.5.107:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/assets/public/favicon_js.ico",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/ftp/acquisitions.md",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/main.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/polyfills.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/runtime.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/sitemap.xml",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/styles.css",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						},
+						{
+							"uri": "http://192.168.5.107:3000/vendor.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						}
+					],
+					"count": "9",
+					"solution": "",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "1"
+				}
+			]
+		}
+	]
+}

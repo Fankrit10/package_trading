@@ -1,0 +1,10 @@
+services:
+  juice-shop:
+    image: bkimminich/juice-shop:v14.3.1
+    container_name: juice-shop
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    volumes: []
+    environment:
+      - NODE_ENV=production

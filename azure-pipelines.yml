@@ -1,0 +1,274 @@
+trigger:
+- dev
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  packageName: 'trading'
+  version: '0.1.2'
+  port: '8001'
+  tag: '$(Build.BuildId)'
+  COMMIT_REPORTS: 'false'
+
+stages:
+- stage: Build
+  displayName: 'Build, Test & Deploy'
+  jobs:
+  - job: BuildAndTest
+    displayName: 'Build & Test'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.12'
+        addToPath: true
+        architecture: 'x64'
+      displayName: 'Use Python 3.12'
+
+    - script: |
+        python -m pip install --upgrade pip setuptools wheel
+       pip install -r requirements.txt
+      displayName: 'Install dependencies'
+
+    - script: |
+        coverage run -m pytest
+        coverage report -m
+      displayName: 'Test and coverage'
+
+    - script: |
+        flake8 . --exclude=juice-shop,juice,trading
+      displayName: 'Analyze flake8 code'
+
+    - script: |
+        pylint trading/ --ignore=juice-shop,juice,trading
+      displayName: 'Analyze pylint'
+
+    - script: |
+        bandit -r trading -x trading/tests,trading/venv,trading/__pycache__,trading/.pytest_cache,trading/fakes
+      displayName: 'Analyze Security'
+
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'ml-desarrollo-back(28463d1b-cdcc-4b6b-9248-69e708529c65)'
+        KeyVaultName: 'mldesarrolloback'
+        SecretsFilter: '*'
+        RunAsPreJob: true
+
+    - task: AzureCLI@2
+      inputs:
+        azureSubscription: 'ml-desarrollo-back(28463d1b-cdcc-4b6b-9248-69e708529c65)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          az acr login --name containerregistrydevml
+          docker build --build-arg TWINE_PASSWORD=$(TWINE-PASSWORD) -t containerregistrydevml.azurecr.io/trading:$(tag) .
+          docker push containerregistrydevml.azurecr.io/trading:$(tag)
+      displayName: 'Build and Push Docker Image to ACR'
+
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'ml-desarrollo-back(28463d1b-cdcc-4b6b-9248-69e708529c65)'
+        WebAppName: 'trading-v1'
+        appType: 'webAppContainer'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'ml-desarrollo-back'
+        SlotName: 'production'
+        DockerNamespace: 'containerregistrydevml.azurecr.io'
+        DockerRepository: 'trading'
+        DockerImageTag: $(tag)
+        AppSettings: '-WEBSITES_PORT 8001'
+      displayName: 'Deploy WebApp Container'
+
+    - task: AzureAppServiceSettings@1
+      displayName: 'Set App Service Settings'
+      inputs:
+        azureSubscription: 'ml-desarrollo-back(28463d1b-cdcc-4b6b-9248-69e708529c65)'
+        appName: 'trading-v1'
+        resourceGroupName: 'ml-desarrollo-back'
+        appSettings: |
+          [
+            {"name": "ACCESS_TOKEN_EXPIRE_MINUTES", "value": "$(ACCESS-TOKEN-EXPIRE-MINUTES)"},
+            {"name": "AZURE_CONNECTION_CHAIN", "value": "$(AZURE-CONNECTION-CHAIN)"},
+            {"name": "AZURE_COMMUNICATION_SERVICES_CONNECTION_STRING", "value": "$(AZURE-COMMUNICATION-SERVICES-CONNECTION-STRING)"},
+            {"name": "AES_KEY", "value": "$(AES-KEY)"},
+            {"name": "AES_IV", "value": "$(AES-IV)"},
+            {"name": "MONGO_URL", "value": "$(MONGO-URL)"},
+            {"name": "DOCKER_REGISTRY_SERVER_PASSWORD", "value": "$(DOCKER-REGISTRY-SERVER-PASSWORD)"},
+            {"name": "DOCKER_REGISTRY_SERVER_URL", "value": "$(DOCKER-REGISTRY-SERVER-URL)"},
+            {"name": "FRONT_END_CUSTOMER", "value": "$(FRONT-END-CUSTOMER)"},
+            {"name": "HOST_TRADING", "value": "$(HOST-TRADING)"},
+            {"name": "DOCKER_REGISTRY_SERVER_USERNAME", "value": "$(DOCKER-REGISTRY-SERVER-USERNAME)"},
+            {"name": "OPENAI_API_KEY", "value": "$(OPENAI-API-KEY)"}
+          ]
+
+- stage: SecurityScan
+  displayName: 'Security Scan with OWASP ZAP'
+  dependsOn: Build
+  jobs:
+  - job: security_scan
+    displayName: 'Run Backend & Frontend ZAP Scans'
+    pool:
+      vmImage: 'ubuntu-latest'
+    steps:
+    - task: UsePythonVersion@0
+      inputs:
+        versionSpec: '3.12'
+        addToPath: true
+        architecture: 'x64'
+      displayName: 'Use Python 3.12'
+
+    - task: AzureKeyVault@2
+      inputs:
+        azureSubscription: 'ml-desarrollo-back(28463d1b-cdcc-4b6b-9248-69e708529c65)'
+        KeyVaultName: 'mldesarrolloback'
+        SecretsFilter: '*'
+        RunAsPreJob: true
+
+    - script: |
+        python -m pip install --upgrade pip setuptools wheel
+        pip install -r requirements.txt
+      displayName: 'Install dependencies'
+
+    - script: |
+        docker run --rm -v $(Build.SourcesDirectory):/zap/wrk:rw -t ghcr.io/zaproxy/zaproxy:weekly \
+          zap-baseline.py -t "$HOST_TRADING" \
+          -J /zap/wrk/zap_baseline.json -r /zap/wrk/zap_baseline.html || true
+      displayName: 'Run OWASP ZAP Baseline Scan'
+      env:
+        HOST_TRADING: '$(HOST-TRADING)'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+    - script: |
+        docker run --rm -v $(Build.SourcesDirectory):/zap/wrk:rw -t ghcr.io/zaproxy/zaproxy:weekly \
+          zap-full-scan.py -t "$HOST_TRADING" \
+          -J /zap/wrk/zap_full.json -r /zap/wrk/zap_full.html || true
+      displayName: 'Run OWASP ZAP Full Scan'
+      env:
+        HOST_TRADING: '$(HOST-TRADING)'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+    - script: |
+        docker run --rm -v $(Build.SourcesDirectory):/zap/wrk:rw -t ghcr.io/zaproxy/zaproxy:weekly \
+          zap-api-scan.py -t "$HOST_TRADING" -f openapi \
+          -J /zap/wrk/zap_api.json -r /zap/wrk/zap_api.html || true
+      displayName: 'Run OWASP ZAP API Scan'
+      env:
+        HOST_TRADING: '$(HOST-TRADING)'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)'
+        ArtifactName: 'zap-reports'
+        publishLocation: 'Container'
+
+    - bash: |
+        ok=true
+        for f in "zap_baseline.json" "zap_full.json" "zap_api.json"; do
+          if [ ! -f "$(Build.SourcesDirectory)/$f" ]; then
+            echo "MISSING $f"
+            ok=false
+          fi
+        done
+        echo "##vso[task.setvariable variable=HasBackendZap]$ok"
+      name: HasBackendZap
+      displayName: 'Check backend ZAP JSONs exist'
+      workingDirectory: '$(Build.SourcesDirectory)'
+      continueOnError: true
+      condition: always()
+
+    - task: PythonScript@0
+      condition: and(succeededOrFailed(), eq(variables['HasBackendZap'], 'true'))
+      inputs:
+        scriptSource: 'filePath'
+        scriptPath: '$(System.DefaultWorkingDirectory)/trading/controllers/analyze_report.py'
+        arguments: '-i $(Build.SourcesDirectory)/zap_baseline.json $(Build.SourcesDirectory)/zap_full.json $(Build.SourcesDirectory)/zap_api.json -o reporte_vulnerabilidades.json -a $(Build.ArtifactStagingDirectory)'
+        workingDirectory: '$(Build.SourcesDirectory)'
+      env:
+        ACCESS_TOKEN_EXPIRE_MINUTES: $(ACCESS-TOKEN-EXPIRE-MINUTES)
+        AZURE_CONNECTION_CHAIN: $(AZURE-CONNECTION-CHAIN)
+        AES_KEY: $(AES-KEY)
+        AES_IV: $(AES-IV)
+        MONGO_URL: $(MONGO-URL)
+        FRONT_END_CUSTOMER: $(FRONT-END-CUSTOMER)
+        HOST_TRADING: $(HOST-TRADING)
+        OPENAI_API_KEY: $(OPENAI-API-KEY)
+      displayName: 'Analyze ZAP Reports with GenIA'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'vulnerability-analysis'
+        publishLocation: 'Container'
+
+    - script: |
+        docker run --rm -v $(Build.SourcesDirectory):/zap/wrk:rw -t ghcr.io/zaproxy/zaproxy:weekly \
+          zap-full-scan.py -t "$FRONT_END_CUSTOMER" \
+          -J /zap/wrk/zap_frontend_full.json -r /zap/wrk/zap_frontend_full.html || true
+      displayName: 'Run Frontend ZAP Full Scan'
+      env:
+        FRONT_END_CUSTOMER: '$(FRONT-END-CUSTOMER)'
+      workingDirectory: '$(Build.SourcesDirectory)'
+
+    - bash: |
+        if [ -f "$(Build.SourcesDirectory)/zap_frontend_full.json" ]; then
+          echo "##vso[task.setvariable variable=HasFrontendZap]true"
+        else
+          echo "MISSING zap_frontend_full.json"
+          echo "##vso[task.setvariable variable=HasFrontendZap]false"
+        fi
+      name: HasFrontendZap
+      displayName: 'Check frontend ZAP JSON exists'
+      workingDirectory: '$(Build.SourcesDirectory)'
+      continueOnError: true
+      condition: always()
+
+    - task: PythonScript@0
+      condition: and(succeededOrFailed(), eq(variables['HasFrontendZap'], 'true'))
+      inputs:
+        scriptSource: 'filePath'
+        scriptPath: '$(System.DefaultWorkingDirectory)/trading/controllers/analyze_report.py'
+        arguments: '-i $(Build.SourcesDirectory)/zap_frontend_full.json -o reporte_vulnerabilidades_frontend.json -a $(Build.ArtifactStagingDirectory)'
+        workingDirectory: '$(Build.SourcesDirectory)'
+      env:
+        ACCESS_TOKEN_EXPIRE_MINUTES: $(ACCESS-TOKEN-EXPIRE-MINUTES)
+        AZURE_CONNECTION_CHAIN: $(AZURE-CONNECTION-CHAIN)
+        AES_KEY: $(AES-KEY)
+        AES_IV: $(AES-IV)
+        MONGO_URL: $(MONGO-URL)
+        FRONT_END_CUSTOMER: $(FRONT-END-CUSTOMER)
+        HOST_TRADING: $(HOST-TRADING)
+        OPENAI_API_KEY: $(OPENAI-API-KEY)
+      displayName: 'Analyze Post-Deploy Frontend Scan'
+
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'frontend-vulnerability-analysis'
+        publishLocation: 'Container'
+
+    - script: |
+        set -e
+        if [ "$(COMMIT_REPORTS)" = "true" ]; then
+          mkdir -p security-reports/$(Build.BuildId)
+          cp -f $(Build.SourcesDirectory)/zap_*.json security-reports/$(Build.BuildId)/ 2>/dev/null || true
+          cp -f $(Build.SourcesDirectory)/zap_*.html security-reports/$(Build.BuildId)/ 2>/dev/null || true
+          cp -f $(Build.ArtifactStagingDirectory)/*.json security-reports/$(Build.BuildId)/ 2>/dev/null || true
+          git config user.email "ado-bot@local"
+          git config user.name "ADO Bot"
+          git add security-reports/$(Build.BuildId) || true
+          if git diff --cached --quiet; then
+            echo "No hay cambios que commitear."
+          else
+            git commit -m "chore(security): add ZAP reports for build $(Build.BuildId)"
+            git -c http.extraheader="AUTHORIZATION: bearer $(System.AccessToken)" push origin HEAD:$(Build.SourceBranch)
+          fi
+        fi
+      displayName: 'Commit reports to repository'
+      env:
+        System_AccessToken: $(System.AccessToken)
+      condition: always()
+      workingDirectory: '$(Build.SourcesDirectory)'
